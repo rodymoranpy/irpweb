@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PermisoEditDlg" widgetVar="PermisoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPermisoTitle}">
+            <h:form id="PermisoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{permisoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPermisoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{permisoController.selected.id}" title="#{bundle.EditPermisoTitle_id}" required="true" requiredMessage="#{bundle.EditPermisoRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditPermisoLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{permisoController.selected.estado}" title="#{bundle.EditPermisoTitle_estado}" />
+                        <p:outputLabel value="#{bundle.EditPermisoLabel_fecharegitro}" for="fecharegitro" />
+                        <p:calendar id="fecharegitro" pattern="MM/dd/yyyy HH:mm:ss" value="#{permisoController.selected.fecharegitro}" title="#{bundle.EditPermisoTitle_fecharegitro}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditPermisoLabel_fechaultimamodificacion}" for="fechaultimamodificacion" />
+                        <p:calendar id="fechaultimamodificacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{permisoController.selected.fechaultimamodificacion}" title="#{bundle.EditPermisoTitle_fechaultimamodificacion}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditPermisoLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{permisoController.selected.nombre}" title="#{bundle.EditPermisoTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.EditPermisoLabel_usuarioultimamodificacion}" for="usuarioultimamodificacion" />
+                        <p:inputText id="usuarioultimamodificacion" value="#{permisoController.selected.usuarioultimamodificacion}" title="#{bundle.EditPermisoTitle_usuarioultimamodificacion}" />
+                        <p:outputLabel value="#{bundle.EditPermisoLabel_rolId}" for="rolId" />
+                        <p:selectOneMenu id="rolId" value="#{permisoController.selected.rolId}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{rolController.itemsAvailableSelectOne}"
+                                           var="rolIdItem"
+                                           itemValue="#{rolIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{permisoController.update}" value="#{bundle.Save}" update="display,:PermisoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PermisoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PermisoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuarioCreateDlg" widgetVar="UsuarioCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUsuarioTitle}">
+            <h:form id="UsuarioCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{usuarioController.selected.id}" title="#{bundle.CreateUsuarioTitle_id}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{usuarioController.selected.estado}" title="#{bundle.CreateUsuarioTitle_estado}" />
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_fecharegitro}" for="fecharegitro" />
+                        <p:calendar id="fecharegitro" pattern="MM/dd/yyyy HH:mm:ss" value="#{usuarioController.selected.fecharegitro}" title="#{bundle.EditUsuarioTitle_fecharegitro}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_fechaultimamodificacion}" for="fechaultimamodificacion" />
+                        <p:calendar id="fechaultimamodificacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{usuarioController.selected.fechaultimamodificacion}" title="#{bundle.EditUsuarioTitle_fechaultimamodificacion}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{usuarioController.selected.nombre}" title="#{bundle.CreateUsuarioTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_password}" for="password" />
+                        <p:inputText id="password" value="#{usuarioController.selected.password}" title="#{bundle.CreateUsuarioTitle_password}" />
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_username}" for="username" />
+                        <p:inputText id="username" value="#{usuarioController.selected.username}" title="#{bundle.CreateUsuarioTitle_username}" />
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_usuarioultimamodificacion}" for="usuarioultimamodificacion" />
+                        <p:inputText id="usuarioultimamodificacion" value="#{usuarioController.selected.usuarioultimamodificacion}" title="#{bundle.CreateUsuarioTitle_usuarioultimamodificacion}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{usuarioController.create}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuarioCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UsuarioCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
